@@ -431,7 +431,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b428ad45c432a204bac3b854c1b85f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentsToDisable: []
+  componentsToDisable:
+  - {fileID: 114533424470149042}
+  - {fileID: 114635180151643472}
+  - {fileID: 20280960715223866}
+  - {fileID: 81190538208329078}
   remoteLayerName: RemotePlayer
 --- !u!114 &114978618311282496
 MonoBehaviour:
