@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 public class PlayerSetup : NetworkBehaviour {
     [SerializeField]
     Behaviour[] componentsToDiasble;
+    [SerializeField]
+    private Transform[] spawnPoints;
     private Camera sceneCamera;
     private void Start()
     {
