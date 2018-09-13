@@ -34,28 +34,24 @@ public class PlayerShoot : NetworkBehaviour
     [Client]
     void Shoot()
     {
-        Debug.Log("Shot");
-        // Declare here.. will store info on what we hit
         RaycastHit _hit;
-
-        // if we hit something..
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask))
         {
-            Debug.Log("Raycasting..");
             if (_hit.collider.tag == PLAYER_TAG)
             {
-                
-                Debug.Log("PLayer name:" + _hit.collider.name+ ":"+" Player Tag:" + _hit.collider.tag);
-                CmdPlayerShot(_hit.collider.name);
+                CmdPlayerShot(_hit.collider.name, weapon.damage);
             }
         }
 
     }
 
     [Command]
-    void CmdPlayerShot(string _ID)
+    void CmdPlayerShot(string _playerID, int _damage)
     {
-        Debug.Log(_ID + " has been shot.");
+        Debug.Log(_playerID + " has been shot.");
+
+        Player _player = GameManager.GetPlayer(_playerID);
+        _player.RpcTakeDamage(_damage);
     }
 
 }

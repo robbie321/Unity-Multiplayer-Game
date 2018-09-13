@@ -2,17 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+
+
 //act as an object that is networked
 [RequireComponent(typeof(Player))]
 public class PlayerSetup : NetworkBehaviour {
+
+
+
     [SerializeField]
     Behaviour[] componentsToDisable;
+
+
+    Camera sceneCamera;
+
+
+
     [SerializeField]
     private Transform[] spawnPoints;
-    private Camera sceneCamera;
 
     [SerializeField]
     string remoteLayerName = "RemotePlayer";
+
     private void Start()
     {
         //check if we are the local player
@@ -20,7 +31,8 @@ public class PlayerSetup : NetworkBehaviour {
         {
             DisableComponents();
             AssignRemoteLayer();
-                transform.position = new Vector3(17, 1, 10);
+
+             transform.position = new Vector3(17, 1, 10);
 
         }
         else
@@ -34,6 +46,11 @@ public class PlayerSetup : NetworkBehaviour {
         }
        GetComponent<Player>().Setup();
     }
+
+
+
+
+
 
     public override void OnStartClient()
     {
@@ -58,11 +75,15 @@ public class PlayerSetup : NetworkBehaviour {
         }
     }
 
-    private void OnDisable()
+    // When we are destroyed
+    void OnDisable()
     {
-        if(sceneCamera != null)
+        // Re-enable the scene camera
+        if (sceneCamera != null)
         {
             sceneCamera.gameObject.SetActive(true);
         }
+
+        GameManager.UnRegisterPlayer(transform.name);
     }
 }

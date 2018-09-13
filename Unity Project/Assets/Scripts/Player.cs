@@ -34,15 +34,15 @@ public class Player : NetworkBehaviour
         SetDefaults();
     }
 
-    //void Update()
+    //void Update ()
     //{
-    //    if (!isLocalPlayer)
-    //        return;
+    //  if (!isLocalPlayer)
+    //      return;
 
-    //    if (Input.GetKeyDown(KeyCode.K))
-    //    {
-    //        RpcTakeDamage(99999);
-    //    }
+    //  if (Input.GetKeyDown(KeyCode.K))
+    //  {
+    //      RpcTakeDamage(99999);
+    //  }
     //}
 
     [ClientRpc]
@@ -76,20 +76,20 @@ public class Player : NetworkBehaviour
 
         Debug.Log(transform.name + " is DEAD!");
 
-        //StartCoroutine(Respawn());
+        StartCoroutine(Respawn());
     }
 
-    //private IEnumerator Respawn()
-    //{
-    //   // yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
 
-    //    SetDefaults();
-    //    Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
-    //    transform.position = _spawnPoint.position;
-    //    transform.rotation = _spawnPoint.rotation;
+        SetDefaults();
+        Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
+        transform.position = _spawnPoint.position;
+        transform.rotation = _spawnPoint.rotation;
 
-    //    Debug.Log(transform.name + " respawned.");
-    //}
+        Debug.Log(transform.name + " respawned.");
+    }
 
     public void SetDefaults()
     {

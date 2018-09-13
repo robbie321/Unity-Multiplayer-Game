@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
-   // public MatchSettings matchSettings;
+    public MatchSettings matchSettings;
 
     void Awake()
     {
