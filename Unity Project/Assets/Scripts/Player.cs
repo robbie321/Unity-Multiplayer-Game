@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+
 using System.Collections;
 
 public class Player : NetworkBehaviour
@@ -21,6 +22,8 @@ public class Player : NetworkBehaviour
 
     [SerializeField]
     private Behaviour[] disableOnDeath;
+
+    [SerializeField]
     private bool[] wasEnabled;
 
     public void Setup()
@@ -84,6 +87,8 @@ public class Player : NetworkBehaviour
         yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
 
         SetDefaults();
+        //Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
+
         Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = _spawnPoint.position;
         transform.rotation = _spawnPoint.rotation;

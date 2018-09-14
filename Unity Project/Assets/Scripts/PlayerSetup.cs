@@ -32,7 +32,7 @@ public class PlayerSetup : NetworkBehaviour {
             DisableComponents();
             AssignRemoteLayer();
 
-             transform.position = new Vector3(17, 1, 10);
+            transform.position = new Vector3(17, 1, 10);
 
         }
         else
