@@ -13,6 +13,10 @@ public class PlayerSetup : NetworkBehaviour {
     [SerializeField]
     Behaviour[] componentsToDisable;
 
+    [SerializeField]
+    GameObject playerUIPrefab;
+    private GameObject playerUIInstance;
+
 
     Camera sceneCamera;
 
@@ -32,7 +36,7 @@ public class PlayerSetup : NetworkBehaviour {
             DisableComponents();
             AssignRemoteLayer();
 
-             transform.position = new Vector3(17, 1, 10);
+            transform.position = new Vector3(17, 1, 10);
 
         }
         else
@@ -43,6 +47,9 @@ public class PlayerSetup : NetworkBehaviour {
             {
                 sceneCamera.gameObject.SetActive(false);
             }
+            playerUIInstance = Instantiate(playerUIPrefab);
+            playerUIInstance.name = playerUIPrefab.name;
+
         }
        GetComponent<Player>().Setup();
     }
@@ -78,6 +85,8 @@ public class PlayerSetup : NetworkBehaviour {
     // When we are destroyed
     void OnDisable()
     {
+        Destroy(playerUIInstance);
+
         // Re-enable the scene camera
         if (sceneCamera != null)
         {
