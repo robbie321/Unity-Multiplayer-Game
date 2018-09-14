@@ -84,9 +84,19 @@ public class Player : NetworkBehaviour
         yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
 
         SetDefaults();
-        Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
-        transform.position = _spawnPoint.position;
-        transform.rotation = _spawnPoint.rotation;
+        if (!isLocalPlayer)
+        {
+            transform.position = new Vector3(17, 1, 10);
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
+        else
+        {
+            transform.position = new Vector3(17, 1, -10);
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
+        //Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
+        //transform.position = _spawnPoint.position;
+        //transform.rotation = _spawnPoint.rotation;
 
         Debug.Log(transform.name + " respawned.");
     }
