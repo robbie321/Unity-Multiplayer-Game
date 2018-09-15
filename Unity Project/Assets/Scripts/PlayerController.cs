@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(PlayerController))]
 public class PlayerController : MonoBehaviour {
     //Players speed
@@ -8,23 +9,30 @@ public class PlayerController : MonoBehaviour {
     private float lookSensitivity = 3;
     //players motor
     private PlayerMotor motor;
+    //[SerializeField]
+    private Animator animator;
+
 
     private void Start()
     {
         motor = GetComponent<PlayerMotor>();
+        animator = GetComponent<Animator>(); 
     }
 
     private void Update()
     {
         //calculate movement velocity as a 3d vector
-        float xMov = Input.GetAxisRaw("Horizontal");
-        float zMov = Input.GetAxisRaw("Vertical");
+        float xMov = Input.GetAxis("Horizontal");
+        float zMov = Input.GetAxis("Vertical");
 
         Vector3 movHorizontal = transform.right * xMov;
         Vector3 movVertical = transform.forward * zMov;
 
         //final velocity vector
-        Vector3 velocity = (movHorizontal + movVertical).normalized * speed;
+        Vector3 velocity = (movHorizontal + movVertical) * speed;
+
+        //Animate movement
+        //animator.SetFloat("ForwardVelocity", zMov);
 
         //apply movement
         motor.Move(velocity);
